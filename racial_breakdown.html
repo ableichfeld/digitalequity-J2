@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Broadband Subscriptions by Race and Ethnicity</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="equity_style.css"/>
+    <style>
+      #raceButton{
+        background-color: #934505;
+        border: none;
+        width: 90px;
+        height: 40px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10pt;
+      }
+
+      #raceButton:hover{
+        background-color: #934505;
+        color: white;
+        width: 90px;
+        height: 40px;
+      }
+
+      #edButton{
+        background-color: #bc2848;
+        border: none;
+        width: 90px;
+        height: 40px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10pt;
+      }
+
+      #edButton:hover{
+        background-color: #7f0b17;
+        color: white;
+        width: 95px;
+        height: 45px;
+        box-shadow: 4px 4px #bc2848;
+        margin: 2px;
+        margin-left: 3px;
+      }
+
+      #ageButton{
+        background-color: #ddda6f;
+        border: none;
+        width: 90px;
+        height: 40px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10pt;
+      }
+
+      #ageButton:hover{
+        background-color: #bf9c06;
+        color: white;
+        width: 95px;
+        height: 45px;
+        box-shadow: 4px 4px #ddda6f;
+        margin: 2px;
+        margin-left: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Percentage of population with broadband subscriptions by selected characteristics</h1>
+    <h2>Subscriptions by race and ethnicity</h2>
+    <script>
+    // Update height so the size of each rect stays the same
+      var width = 670;
+      var height = 590;
+      var margin = {top: 25, left: 150, right: 25, bottom: 150};
+
+      var svg = d3.select("body")
+        .append("svg")
+        .attr("width",width)
+        .attr("height",height);
+
+      var data = [
+        {x: "Black/African American", y: 85.5, color: "#ffb84d", stroke:"#a5570d"},
+        {x: "Asian alone", y: 91.4, color: "#ffb84d", stroke:"#a5570d"},
+        {x: "Hispanic/Latino", y: 91.8, color: "#ffb84d", stroke:"#a5570d"},
+        {x: "White", y: 92.7, color: "#ffb84d", stroke:"#a5570d"},
+        {x: "Total population", y: 90.6, color: "#4971b6", stroke:"#2e4289"}
+      ];
+
+        var xScale = d3.scaleLinear()
+          .domain([0,100])
+          .range([margin.left, width-margin.right]);
+
+        var yScale = d3.scaleBand()
+          .domain(["Black/African American","Asian alone","Hispanic/Latino","White","Total population"])
+          .rangeRound([margin.top, height-margin.bottom])
+          .padding(0.5);
+
+        var xAxis = svg.append("g")
+          .attr("class","axis")
+          .attr("transform",`translate(0,${height-margin.bottom})`)
+          .call(d3.axisBottom().scale(xScale));
+
+        var yAxis = svg.append("g")
+          .attr("class","axis")
+          .attr("transform",`translate(${margin.left},0)`)
+          .call(d3.axisLeft().scale(yScale))
+          .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx",".5em")
+            .attr("dy","-.5em")
+            .attr("transform","rotate(-45)");
+
+        var tooltip = d3.select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("position", "absolute")
+          .style("z-index", "10")
+          .style("opacity", 0);
+
+        var bar = svg.selectAll("rect")
+          .data(data)
+          .enter()
+          .append("rect")
+            .attr("x", margin.left)
+            .attr("y", function(d) { return yScale(d.x); })
+            .attr("width",function(d){return xScale(d.y)-margin.left;})
+            .attr("height", yScale.bandwidth())
+            .attr("fill",function(d){ return d.color;})
+            .attr("opacity",".65")
+            .attr("stroke",function(d){ return d.stroke;})
+            .attr("stroke-width","2")
+            .on("mouseover", function(d) {
+              d3.select(this)
+                .attr("opacity",".85");
+                tooltip.transition()
+                .duration(300)
+                .style("opacity", "0.9")
+                .text(`${d.y}%`);
+            }).on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+            .on("mouseout", function() {
+              d3.select(this)
+                .attr("opacity",".65");
+              return tooltip.transition()
+              .duration(300)
+              .style("opacity", "0");
+            })
+
+        var xLabel = svg.append("text")
+          .attr("class","axisLabel")
+          .attr("x",width/2)
+          .attr("y",height-35)
+          .attr("text-anchor","middle")
+          .text("Population in households with a broadband subscription (%)");
+
+        var yLabel = svg.append("text")
+          .attr("class","axisLabel")
+          .attr("transform","rotate(-90)")
+          .attr("x",(-height+160)/2)
+          .attr("y",20)
+          .attr("text-anchor","middle")
+          .text("Age group");
+    </script>
+    <br>
+    <button type="button" class="thatButton" id="edButton" onclick="window.location.href = 'ed_breakdown.html';">Education</button>
+    <button type="button" id="raceButton">Race</button>
+    <button type="button" class="thatButton" id="ageButton"  onclick="window.location.href = 'age_breakdown.html';">Age</button>
+    <p class = "explainer">Use the buttons to explore the broadband subscriptions in different populations. "White" refers to white-only, non-Hispanic household populations. "Total Population" represents the overall percentage of the Boston population in households with a broadband subscription.</p>
+    <p class = "credit">Data from <a href="https://data.census.gov/cedsci/table?q=S28&d=ACS%201-Year%20Estimates%20Subject%20Tables&g=1600000US2507000&table=S2802&tid=ACSST1Y2018.S2802&lastDisplayedRow=21&vintage=2018&mode=&hidePreview=true" target=_blank>American Community Survey:2018</a> from the U.S. Census Bureau</p>
+
+  </body>
+</html>

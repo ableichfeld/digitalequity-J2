@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200i,300,400|Spectral:300,400,700&display=swap');
+
+h1{
+  font-size: 1.35em;
+  margin: 2px;
+}
+
+h2{
+  font-size: 1.1em;
+  margin: 2px;
+}
+
+h1,h2{
+  font-family: Source Sans Pro;
+  font-weight: bold;
+}
+
+.explainer{
+  width: 575px;
+  font-family: Source Sans Pro;
+  font-weight: 300;
+  font-size: 11pt;
+}
+
+.credit{
+  width: 575px;
+  font-family: Source Sans Pro;
+  font-weight: 200;
+  font-style: italic;
+  font-size: 9pt;
+}
+
+a{
+  text-decoration: none;
+  color: #0066cc;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+a:visited{
+  color: #990000;
+}
+
+.axisLabel{
+  font-family: Source Sans Pro;
+  font-weight: 300;
+}
+
+.axis{
+  color: grey;
+  opacity: 1;
+  font-size: 9pt;
+}
+
+div.tooltip{
+  position:absolute;
+  text-align: center;
+  width: 50px;
+  height: 22px;
+  padding: 2px;
+  font-size: 12pt;
+  font-family: Source Sans Pro;
+  font-weight: 300;
+  background: grey;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  color: white;
+}
+
+div.circleTip{
+  position:absolute;
+  text-align: center;
+  width: 150px;
+  height: 40px;
+  padding: 2px;
+  font-size: 12pt;
+  font-family: Source Sans Pro;
+  font-weight: 300;
+  background: grey;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  color: white;
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.9;
+}
+.grid path {
+      stroke-width: 0;
+}
+
+.grid{
+  color:lightgrey;
+  z-index: 1;
+}
+
+.bar{
+  z-index: 5;
+}
+
+button{
+  margin: 5px;
+  font-family: Source Sans Pro;
+}
+
+
+/*Content Row*/
+.page-wrapper {
+  margin: 15px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  margin-top: -150px;
+}
+
+.column-left {
+  height: 100px;
+  width: 75%;
+}
+
+.column-right {
+  height: 100px;
+  width: 25%;
+}
+
+.filler{
+  height: 225px;
+}
