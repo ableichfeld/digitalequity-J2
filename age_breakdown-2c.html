@@ -82,7 +82,7 @@
                 .attr("height",height);
 
               var data = [
-                {x: "18-65", y: 93.0, color: "#ddda6f", stroke:"#ceb332"},
+                {x: "18-64", y: 93.0, color: "#ddda6f", stroke:"#ceb332"},
                 {x: "65+", y: 67.9, color: "#ddda6f", stroke:"#ceb332"},
                 {x: "Total population", y: 90.6, color: "#4971b6", stroke:"#2e4289"}
               ];
@@ -92,7 +92,7 @@
                   .range([margin.left, width-margin.right]);
 
                 var yScale = d3.scaleBand()
-                  .domain(["18-65","65+","Total population"])
+                  .domain(["18-64","65+","Total population"])
                   .rangeRound([margin.top, height-margin.bottom])
                   .padding(0.5);
 
@@ -166,7 +166,7 @@
         <div class="column">
           <div class="column-right">
             <div class="filler"></div>
-            <p class = "explainer">Use the buttons to explore the broadband subscriptions in different populations. "Total Population" represents the overall percentage of the Boston population in households with a broadband subscription.</p>
+            <p class = "explainer">Use the buttons to explore the broadband subscriptions in different populations. Hover over the bars for percentages. "Total Population" represents the overall percentage of the Boston population in households with a broadband subscription.</p>
             <p class = "credit">Data from <a href="https://data.census.gov/cedsci/table?q=S28&d=ACS%201-Year%20Estimates%20Subject%20Tables&g=1600000US2507000&table=S2802&tid=ACSST1Y2018.S2802&lastDisplayedRow=21&vintage=2018&mode=&hidePreview=true" target=_blank>American Community Survey:2018</a> from the U.S. Census Bureau</p>
             <button type="button" id="edButton" onclick="window.location.href = 'ed_breakdown-2c.html';">Education</button>
             <br>
